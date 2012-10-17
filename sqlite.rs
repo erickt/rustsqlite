@@ -67,6 +67,42 @@ pub enum sqlite_result_code {
   SQLITE_DONE       = 101,
 }
 
+impl sqlite_result_code: to_str::ToStr {
+    pure fn to_str() -> ~str {
+        match self {
+            SQLITE_OK => ~"Ok",
+            SQLITE_ERROR => ~"SQLITE_ERROR",
+            SQLITE_INTERNAL => ~"SQLITE_INTERNAL",
+            SQLITE_PERM => ~"SQLITE_PERM",
+            SQLITE_ABORT => ~"SQLITE_ABORT",
+            SQLITE_BUSY => ~"SQLITE_BUSY",
+            SQLITE_LOCKED => ~"SQLITE_LOCKED",
+            SQLITE_NOMEM => ~"SQLITE_NOMEM",
+            SQLITE_READONLY => ~"SQLITE_READONLY",
+            SQLITE_INTERRUPT => ~"SQLITE_INTERRUPT",
+            SQLITE_IOERR => ~"SQLITE_IOERR",
+            SQLITE_CORRUPT => ~"SQLITE_CORRUPT",
+            SQLITE_NOTFOUND => ~"SQLITE_NOTFOUND",
+            SQLITE_FULL => ~"SQLITE_FULL",
+            SQLITE_CANTOPEN => ~"SQLITE_CANTOPEN",
+            SQLITE_PROTOCOL => ~"SQLITE_PROTOCOL",
+            SQLITE_EMPTY => ~"SQLITE_EMPTY",
+            SQLITE_SCHEMA => ~"SQLITE_SCHEMA",
+            SQLITE_TOOBIG => ~"SQLITE_TOOBIG",
+            SQLITE_CONSTRAINT => ~"SQLITE_CONSTRAINT",
+            SQLITE_MISMATCH => ~"SQLITE_MISMATCH",
+            SQLITE_MISUSE => ~"SQLITE_MISUSE",
+            SQLITE_NOLFS => ~"SQLITE_NOLFS",
+            SQLITE_AUTH => ~"SQLITE_AUTH",
+            SQLITE_FORMAT => ~"SQLITE_FORMAT",
+            SQLITE_RANGE => ~"SQLITE_RANGE",
+            SQLITE_NOTADB => ~"SQLITE_NOTADB",
+            SQLITE_ROW => ~"SQLITE_ROW",
+            SQLITE_DONE => ~"SQLITE_DONE",
+        }
+    }
+}
+
 impl sqlite_result_code : cmp::Eq {
    pure fn eq(other: &sqlite_result_code) -> bool { self as int == *other as int }
    pure fn ne(other: &sqlite_result_code) -> bool { !self.eq(other) }
