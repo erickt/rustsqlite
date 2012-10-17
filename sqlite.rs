@@ -33,8 +33,7 @@
 
 extern mod std;
 use libc::*;
-use std::map;
-use std::map::HashMap;
+use send_map::linear::LinearMap;
 
 // export sqlite_open, sqlite_result_code, sqlite_stmt, sqlite_dbh, sqlite_bind_arg,
 //       sqlite_column_type, sqlite_result, sqlite_row_result;
@@ -128,9 +127,9 @@ enum sqlite_column_type {
   sqlite_null,
 }
 
-type sqlite_result<T> = result::Result<T, sqlite_result_code>;
+type sqlite_result<T> = Result<T, sqlite_result_code>;
 
-type RowMap = map::HashMap<~str, sqlite_bind_arg>;
+type RowMap = LinearMap<~str, sqlite_bind_arg>;
 
 enum sqlite_row_result {
   row(RowMap),
@@ -285,7 +284,7 @@ fn sqlite_open(path: &str) -> sqlite_result<sqlite_dbh> {
       if is_row == SQLITE_ROW {
         let column_cnt = self.get_column_count();
         let mut i = 0;
-        let sqlrow = map::HashMap();
+        let mut sqlrow = LinearMap();
         while( i < column_cnt ) {
           let name = self.get_column_name(i);
           let coltype = self.get_column_type(i);
